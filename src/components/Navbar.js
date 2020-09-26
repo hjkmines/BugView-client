@@ -5,11 +5,11 @@ const Navbar = () => {
         <div>
             <nav>
                 <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Logo</a>
+                    <a href="/" class="brand-logo">BugView</a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            <li><a href="sass.html">Log In</a></li>
-                            <li><a href="badges.html">Sign Out</a></li>
-                            <li><a href="collapsible.html">My Profile</a></li>
+                            <li><a href="/login">Log In</a></li>
+                            <li><a href="/signup">Register</a></li>
+                            <li><a href="/profile">My Profile</a></li>
                         </ul>
                 </div>
             </nav>
