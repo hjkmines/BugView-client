@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useReducer } from 'react';
+import React, { useEffect, createContext, useReducer, useContext } from 'react';
 import Navbar from '../src/components/Navbar'; 
 import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'; 
 import Home from './components/pages/Home'; 
@@ -9,10 +9,21 @@ import CreatePost from './components/pages/CreatePost';
 import { reducer, initialState} from './reducers/userReducer'; 
 import './App.css'; 
 
-const UserContext = createContext()
+export const UserContext = createContext()
 
 const Routing = () => {
   const history = useHistory(); 
+  const { state, dispatch } = useContext(UserContext)
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if(user) {
+      // dispatch({ type: 'USER', payload: user })
+      history.push('/')
+    } else {
+      history.push('/login')
+    }
+  }, [])
 
   return (
     <Switch>
