@@ -19,6 +19,22 @@ const Profile = () => {
         })
     }, [])
 
+    const followUser = () => {
+        fetch('/follow', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }, 
+            body: JSON.stringify({
+                followId: userid
+            })
+            }).then(res => res.json())
+            .then(data => {
+                dispatch({ type: 'UPDATE', payload: {following: data.following, followers: data.followers} })
+                localStorage.setItem('user', JSON.stringify(data))
+    })}
+
     return (
         <>
         {userProfile ? 
@@ -37,9 +53,15 @@ const Profile = () => {
                     <h5>{userProfile.user.jobTitle}</h5>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '108%' }}>
                         <h5>{userProfile.posts.length} posts</h5>
-                        <h5>40 followers</h5>
-                        <h5>40 following</h5>
+                        <h5>{userProfile.user.followers.length} followers</h5>
+                        <h5>{userProfile.user.following.length} following</h5>
                     </div>
+                    <button 
+                        className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
+                        onClick={() => followUser()}
+                    >
+                    Follow
+                    </button>
                 </div>
             </div>
             <div className='gallery'>
