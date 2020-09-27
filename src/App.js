@@ -5,12 +5,13 @@ import Home from './components/pages/Home';
 import Profile from './components/pages/Profile'; 
 import Login from './components/pages/Login'; 
 import Signup from './components/pages/Signup'; 
+import './App.css'; 
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <Route path='/'>
+      <Route exact path='/'>
         <Home /> 
       </Route>  
       <Route path='/login'>
