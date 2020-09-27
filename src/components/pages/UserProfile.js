@@ -47,7 +47,7 @@ const Profile = () => {
     })}
 
     const unfollowUser = () => {
-        fetch('/follow', {
+        fetch('/unfollow', {
             method: 'PUT', 
             headers: {
                 'Content-Type': 'application/json', 
@@ -61,11 +61,12 @@ const Profile = () => {
                 dispatch({ type: 'UPDATE', payload: {following: data.following, followers: data.followers} })
                 localStorage.setItem('user', JSON.stringify(data))
                 setUserProfile((prevState) => {
+                    const newFollower = prevState.user.followers.filter(item => item !== data._id)
                     return {
                         ...prevState, 
                         user: {
                             ...prevState.user, 
-                            followers: [...prevState.user.followers, data._id]
+                            followers: newFollower
                         }
                     }
                 })
@@ -97,6 +98,7 @@ const Profile = () => {
                     <button 
                         className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
                         onClick={() => followUser()}
+                        style={{ margin: '10px' }}
                     >
                     Follow
                     </button>
@@ -104,6 +106,7 @@ const Profile = () => {
                     <button 
                         className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
                         onClick={() => unfollowUser()}
+                        style={{ margin: '10px' }}
                     >
                     Unfollow
                     </button>
