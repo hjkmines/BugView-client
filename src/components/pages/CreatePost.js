@@ -1,16 +1,45 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import M from 'materialize-css'; 
 import { useHistory } from 'react-router-dom'; 
 
 const CreatePost = () => {
     const history = useHistory(); 
     const [title, setTitle] = useState(''); 
-    const [description, setDescription] = useState(''); 
+    const [body, setBody] = useState(''); 
     const [due, setDue] = useState(''); 
     const [github, setGithub] = useState(''); 
     const [teamMembers, setTeamMembers] = useState(''); 
     const [severity, setSeverity] = useState(''); 
     // const [url, setUrl] = useState(''); 
+
+    // useEffect(() => {
+    //     fetch('/createpost', {
+    //         method: 'POST', 
+    //         headers: {
+    //             'Content-Type': 'application/json', 
+    //             'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+    //         }, 
+    //         body: JSON.stringify({
+    //             title, 
+    //             body, 
+    //             due, 
+    //             github, 
+    //             teamMembers, 
+    //             severity 
+    //         })
+    //     }).then(res => res.json())
+    //     .then(data => {
+    //         if(data.error) {
+    //             console.log(data)
+    //             M.toast({ html: data.error, classes: '#c62828 red darken-3' })
+    //         } else {
+    //             M.toast({ html: 'Ticket Submitted Successfully', classes: '#43a047 green darken-1' })
+    //             history.push('/')
+    //         }
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
+    // })
 
     const postDetails = () => {
         // const data = new FormData()
@@ -32,11 +61,12 @@ const CreatePost = () => {
         fetch('/createpost', {
             method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }, 
             body: JSON.stringify({
                 title, 
-                description, 
+                body, 
                 due, 
                 github, 
                 teamMembers, 
@@ -75,8 +105,8 @@ const CreatePost = () => {
             <input 
                 type='text' 
                 placeholder='Description' 
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
             />
             <input 
                 type='text' 
