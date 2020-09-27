@@ -1,6 +1,23 @@
-import React from 'react'; 
+import React, { useEffect, useState, useContext } from 'react'; 
+import { UserContext } from '../../App'; 
 
 const Profile = () => {
+
+    const [myPosts, setMyPosts] = useState([]); 
+    const { state, dispatch } = useContext(UserContext); 
+
+    useEffect(() => {       
+
+        fetch('/mypost', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }
+        }).then(res => res.json())
+        .then(result => {
+            setMyPosts(result.mypost)
+        })
+    }, [])
+
     return (
         <div style={{ maxWidth: '550px', margin: '0px auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '1px solid grey' }}>
@@ -20,12 +37,27 @@ const Profile = () => {
                 </div>
             </div>
             <div className='gallery'>
-                <img className='item' src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/> 
-                <img className='item' src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/> 
-                <img className='item' src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/> 
-                <img className='item' src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/> 
-                <img className='item' src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/> 
-                <img className='item' src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/> 
+            {
+                myPosts.map(item => {
+                    return(
+                        <div className='card home-card' key={item._id}>
+                            <h5>{item.postedBy.name}</h5>
+                            <h5>{state.firstName}</h5>
+                            <div className='card-image'>
+                            <h5>{item.title}</h5> 
+                            </div>
+                            <div className='card-content'>
+                            <i className="material-icons" style={ {color: 'red'} }>add</i>
+                                <h6>{item.body}</h6>
+                                <p>{item.due}</p>
+                                <p>{item.github}</p>
+                                <p>{item.teamMembers}</p>
+                                <p>{item.severity}</p>
+                            </div>
+                        </div>
+                    )
+                })
+            }
             </div>
         </div>
     )
