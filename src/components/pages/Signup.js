@@ -1,7 +1,9 @@
 import React, { useState } from 'react'; 
-import { Link } from 'react-router-dom'; 
+import { Link, useHistory } from 'react-router-dom'; 
+import M from 'materialize-css'; 
 
 const Signup = () => {
+    const history = useHistory(); 
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLasttName] = useState(''); 
     const [jobTitle, setJobTitle] = useState(''); 
@@ -15,15 +17,20 @@ const Signup = () => {
                 'Content-Type': 'application/json'
             }, 
             body: JSON.stringify({
-                firstName: '', 
-                lastName: '', 
-                jobTitle: '', 
-                email: '', 
-                password: ''
+                firstName, 
+                lastName, 
+                jobTitle, 
+                email, 
+                password
             })
         }).then(res => res.json())
         .then(data => {
-            console.log(data)
+            if(data.error) {
+                M.toast({ html: data.error, classes: '#c62828 red darken-3' })
+            } else {
+                M.toast({ html: data.message, classes: '#43a047 green darken-1' })
+                history.push('/login')
+            }
         })
     }
 
