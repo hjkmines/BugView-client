@@ -6,6 +6,7 @@ import Profile from './components/pages/Profile';
 import Login from './components/pages/Login'; 
 import Signup from './components/pages/Signup'; 
 import CreatePost from './components/pages/CreatePost'; 
+import UserProfile from './components/pages/UserProfile'; 
 import { reducer, initialState} from './reducers/userReducer'; 
 import './App.css'; 
 
@@ -33,7 +34,7 @@ const Routing = () => {
       <Route path='/login'>
         <Login /> 
       </Route>
-      <Route path='/profile'>
+      <Route exact path='/profile'>
         <Profile /> 
       </Route>
       <Route path='/signup'>
@@ -41,6 +42,9 @@ const Routing = () => {
       </Route>
       <Route path='/createpost'>
         <CreatePost /> 
+      </Route>
+      <Route path='/profile/:userid'>
+        <UserProfile /> 
       </Route>
     </Switch>
   )
