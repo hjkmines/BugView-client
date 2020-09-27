@@ -13,3 +13,19 @@
   border-bottom: 1px solid #000 !important;
   box-shadow: 0 1px 0 0 #000 !important;
 }
+
+.gallery {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-around;
+}
+
+.item {
+  width: 30%; 
+}
+
+.home-card {
+  max-width: 500px; 
+  height: max-content; 
+  margin: 26px auto; 
+}

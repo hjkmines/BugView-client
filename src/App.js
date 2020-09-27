@@ -5,6 +5,7 @@ import Home from './components/pages/Home';
 import Profile from './components/pages/Profile'; 
 import Login from './components/pages/Login'; 
 import Signup from './components/pages/Signup'; 
+import CreatePost from './components/pages/CreatePost'; 
 import './App.css'; 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
       </Route>
       <Route path='/signup'>
         <Signup /> 
+      </Route>
+      <Route path='/createpost'>
+        <CreatePost /> 
       </Route>
     </Router>
   );
