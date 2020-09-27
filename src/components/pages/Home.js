@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useContext, useCallback } from 'react'; 
+import { UserContext } from '../../App'; 
 
 const Home = () => {
     const [data, setData] = useState([]); 
+    const { state, dispatch } = useContext(UserContext)
 
     useEffect(() => {
         fetch('/allpost', {
@@ -23,6 +25,32 @@ const Home = () => {
             }, 
             body: JSON.stringify({
                 postId: id 
+            })
+        }).then(res => res.json())
+        .then(result => {
+            const newData = data.map(item => {
+                if(item._id == result._id) {
+                    return result 
+                } else {
+                    return item 
+                }
+            })
+            setData(newData)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    const makeComment = (text, postId) => {
+        fetch('/comment', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }, 
+            body: JSON.stringify({
+                postId, 
+                text
             })
         }).then(res => res.json())
         .then(result => {
@@ -63,6 +91,19 @@ const Home = () => {
                                 <p>{item.teamMembers}</p>
                                 <p>{item.severity}</p>
                                 <p>{item.likes.length} likes</p>
+                                {
+                                    item.comments.map(record => {
+                                        return (
+                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}>{record.postedBy.firstName} {record.postedBy.lastName}</span>{record.text}</h6>
+                                        )
+                                    })
+                                }
+                                <form onSubmit={(e) => {
+                                    e.preventDefault()
+                                    makeComment(e.target[0].value, item._id)
+                                }}>
+                                    <input type='text' placeholder='Add a comment' /> 
+                                </form>
                             </div>
                         </div>
                     )
