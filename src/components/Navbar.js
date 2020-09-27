@@ -10,6 +10,7 @@ const Navbar = () => {
         if(state) {
             return [
                 <li><Link to="/profile">My Profile</Link></li>, 
+                <li><Link to="/myfollowerspost">My Teams Tickets</Link></li>, 
                 <li><Link to="/createpost">Create New Ticket</Link></li>,
                 <li>
                     <button 

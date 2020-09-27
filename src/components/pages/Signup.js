@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { Link, useHistory } from 'react-router-dom'; 
 import M from 'materialize-css'; 
 
@@ -9,8 +9,34 @@ const Signup = () => {
     const [jobTitle, setJobTitle] = useState(''); 
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
+    const [image, setImage] = useState('') ;
+    const [url, setUrl] = useState(undefined); 
 
-    const PostData = () => {
+    useEffect(() => {
+        if (url) {
+            uploadFields()
+        }
+    }, [url])
+
+    const uploadImage = () => {
+        const data = new FormData()
+        data.append('file', image)
+        data.append('upload_preset', 'bugview')
+        data.append('cloud_name', 'tk23')
+        fetch('https://api.cloudinary.com/v1_1/tk23/image/upload', {
+            method: 'POST', 
+            body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+            setUrl(data.url)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const uploadFields = () => {
         if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
             M.toast({ html: 'Invalid email', classes: '#c62828 red darken-3' })
             return 
@@ -26,7 +52,8 @@ const Signup = () => {
                 lastName, 
                 jobTitle, 
                 email, 
-                password
+                password, 
+                image: url
             })
         }).then(res => res.json())
         .then(data => {
@@ -39,6 +66,15 @@ const Signup = () => {
         }).catch(err => {
             console.log(err)
         })
+    }
+
+    const PostData = () => {
+        if (image) {
+            uploadImage()
+        } else {
+            uploadFields()
+        }
+        
     }
 
     return (
@@ -75,6 +111,15 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            <div className='file-field input-field'>
+            <div className='btn #64b5f6 blue darken-1'>
+                <span>Upload Profile Picture</span>
+                <input type='file' onChange={(e) => setImage(e.target.files[0])} />
+            </div>
+            <div className='file-path-wrapper'>
+                <input className='file-path validate' type='text' />
+            </div>
+            </div>
             <button 
                 className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
                 onClick={() => PostData()}

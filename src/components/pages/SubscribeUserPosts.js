@@ -7,7 +7,7 @@ const Home = () => {
     const { state, dispatch } = useContext(UserContext)
 
     useEffect(() => {
-        fetch('/allpost', {
+        fetch('/getsubpost', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }
@@ -90,7 +90,7 @@ const Home = () => {
                 data.map( item => {
                     return (
                         <div className='card home-card' key={item._id}>
-                            <h5><Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile'}>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
+                            <h5><Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile' }>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
                             && <i 
                                 className="material-icons" 
                                 style={{ float: 'right' }}

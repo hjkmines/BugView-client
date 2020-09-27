@@ -10,53 +10,8 @@ const CreatePost = () => {
     const [github, setGithub] = useState(''); 
     const [teamMembers, setTeamMembers] = useState(''); 
     const [severity, setSeverity] = useState(''); 
-    // const [url, setUrl] = useState(''); 
-
-    // useEffect(() => {
-    //     fetch('/createpost', {
-    //         method: 'POST', 
-    //         headers: {
-    //             'Content-Type': 'application/json', 
-    //             'Authorization': 'Bearer ' + localStorage.getItem('jwt')
-    //         }, 
-    //         body: JSON.stringify({
-    //             title, 
-    //             body, 
-    //             due, 
-    //             github, 
-    //             teamMembers, 
-    //             severity 
-    //         })
-    //     }).then(res => res.json())
-    //     .then(data => {
-    //         if(data.error) {
-    //             console.log(data)
-    //             M.toast({ html: data.error, classes: '#c62828 red darken-3' })
-    //         } else {
-    //             M.toast({ html: 'Ticket Submitted Successfully', classes: '#43a047 green darken-1' })
-    //             history.push('/')
-    //         }
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // })
 
     const postDetails = () => {
-        // const data = new FormData()
-        // data.append('file', image)
-        // data.append('upload_preset', 'bugview')
-        // data.append('cloud_name', 'tk23')
-        // fetch('https://api.cloudinary.com/v1_1/tk23/image/upload', {
-        //     method: 'POST', 
-        //     body: data
-        // })
-        // .then(res => res.json())
-        // .then(data => {
-        //     setUrl(data.url)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        // })
 
         fetch('/createpost', {
             method: 'POST', 

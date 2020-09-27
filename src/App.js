@@ -7,6 +7,7 @@ import Login from './components/pages/Login';
 import Signup from './components/pages/Signup'; 
 import CreatePost from './components/pages/CreatePost'; 
 import UserProfile from './components/pages/UserProfile'; 
+import SubscribeUserPosts from './components/pages/SubscribeUserPosts'; 
 import { reducer, initialState} from './reducers/userReducer'; 
 import './App.css'; 
 
@@ -45,6 +46,9 @@ const Routing = () => {
       </Route>
       <Route path='/profile/:userid'>
         <UserProfile /> 
+      </Route>
+      <Route path='/myfollowerspost'>
+        <SubscribeUserPosts /> 
       </Route>
     </Switch>
   )
