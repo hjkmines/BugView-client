@@ -118,19 +118,28 @@ const Home = () => {
                                 <p>{item.teamMembers}</p>
                                 <p>{item.severity}</p>
                                 <p>{item.likes.length} likes</p>
-                                {
-                                    item.comments.map(record => {
-                                        return (
-                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}>{record.postedBy.firstName} {record.postedBy.lastName}</span>{record.text}</h6>
-                                        )
-                                    })
-                                }
+                                <div id="modal1" class="modal">
+                                    <div class="modal-content">
+                                        <h4>Modal Header</h4>
+                                        <p>A bunch of text</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                                    </div>
+                                </div>
                                 <form onSubmit={(e) => {
                                     e.preventDefault()
                                     makeComment(e.target[0].value, item._id)
                                 }}>
                                     <input type='text' placeholder='Add a comment' /> 
                                 </form>
+                                {
+                                    item.comments.map(record => {
+                                        return (
+                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}>{record.postedBy.firstName} {record.postedBy.lastName}:</span> {record.text}</h6>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     )
@@ -141,3 +150,4 @@ const Home = () => {
 }; 
 
 export default Home; 
+

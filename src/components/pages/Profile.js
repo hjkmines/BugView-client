@@ -60,31 +60,31 @@ const Profile = () => {
     }
     
     return (
-        <div style={{ maxWidth: '550px', margin: '0px auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '1px solid grey' }}>
+        <div style={{ maxWidth: '1200px', margin: '0px auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '2px solid grey' }}>
                 <div>
                     <img 
-                    style={{ width: '160px', height: '160px', borderRadius: '80px' }} 
+                    style={{ width: '240px', height: '240px', borderRadius: '160px', marginLeft: 'auto', marginRight: 'auto', display: 'block' }} 
                     src={state ? state.image : 'loading'}
                     />
-                    <div className='file-field input-field'>
-                        <div className='btn #64b5f6 blue darken-1'>
+                    <div className='file-field input-field' style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div className='btn #64b5f6 blue darken-1' style={{ marginBottom: '15px' }}>
                             <span>Update Profile Picture</span>
                             <input type='file' onChange={(e) => updateImage(e.target.files[0])} />
                         </div>
-                    <div className='file-path-wrapper'>
+                    <div hidden className='file-path-wrapper'>
                     <input className='file-path validate' type='text' />
                     </div>
                     </div>
                 </div>
-                <div>
-                    <h4>{state ? (state.firstName + state.lastName) : 'Loading'}</h4>
-                    <h4>{state ? (state.email) : 'Loading'}</h4>
-                    <h4>{state ? (state.jobTitle) : 'Loading'}</h4>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <h5><strong>Name: </strong> {state ? (state.firstName + " " + state.lastName) : 'Loading'}</h5>
+                    <h5><strong>Email: </strong> {state ? (state.email) : 'Loading'}</h5>
+                    <h5><strong>Job Title: </strong>{state ? (state.jobTitle) : 'Loading'}</h5>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '108%' }}>
-                        <h5>{myPosts.length} posts</h5>
-                        <h5>{state ? state.followers.length : '0'} followers</h5>
-                        <h5>{state ? state.following.length : '0'} following</h5>
+                        <h5><strong>{myPosts.length}</strong> ticket(s) posted</h5>
+                        <h5><strong>{state ? state.followers.length : '0'}</strong> associated members</h5>
+                        {/* <h5>{state ? state.following.length : '0'} following</h5> */}
                     </div>
                 </div>
             </div>

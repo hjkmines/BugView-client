@@ -78,39 +78,39 @@ const Profile = () => {
         <>
         {userProfile ? 
         
-            <div style={{ maxWidth: '550px', margin: '0px auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '1px solid grey' }}>
+            <div style={{ maxWidth: '1200px', margin: '0px auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '2px solid grey' }}>
                 <div>
                     <img 
-                    style={{ width: '160px', height: '160px', borderRadius: '80px' }} 
+                    style={{ width: '240px', height: '240px', borderRadius: '160px', marginLeft: 'auto', marginRight: 'auto', display: 'block' }} 
                     src={userProfile.user.image}
                     />
                 </div>
-                <div>
-                    <h4>{userProfile.user.firstName} {userProfile.user.lastName}</h4>
-                    <h5>{userProfile.user.email}</h5>
-                    <h5>{userProfile.user.jobTitle}</h5>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <h5><strong>Name: </strong> {userProfile.user.firstName} {userProfile.user.lastName}</h5>
+                    <h5><strong>Email: </strong>{userProfile.user.email}</h5>
+                    <h5><strong>Job Title: </strong>{userProfile.user.jobTitle}</h5>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '108%' }}>
-                        <h5>{userProfile.posts.length} posts</h5>
-                        <h5>{userProfile.user.followers.length} followers</h5>
-                        <h5>{userProfile.user.following.length} following</h5>
+                        <h5><strong>{userProfile.posts.length}</strong> ticket(s) posted</h5>
+                        <h5><strong>{userProfile.user.followers.length}</strong> associated members</h5>
+                        {/* <h5>{userProfile.user.following.length} following</h5> */}
                     </div>
                     {
                         showFollow ? 
                     <button 
-                        className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
+                        className='btn waves-effect waves-light #64b5f6 blue darken-1' 
                         onClick={() => followUser()}
-                        style={{ margin: '10px' }}
+                        style={{ margin: '20px' }}
                     >
-                    Follow
+                    Add teammate 
                     </button>
                         :
                     <button 
-                        className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
+                        className='btn waves-effect waves-light #64b5f6 blue darken-1' 
                         onClick={() => unfollowUser()}
-                        style={{ margin: '10px' }}
+                        style={{ margin: '20px' }}
                     >
-                    Unfollow
+                    Remove teammate 
                     </button>
                     }
                 </div>
