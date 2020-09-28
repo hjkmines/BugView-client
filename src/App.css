@@ -52,3 +52,25 @@
 .collection-item {
   width: 100%
 }
+
+.navigation {
+  background-color: #1e88e5 
+}
+
+.link-title {
+  font-size: 18px;
+  margin-left: 10px; 
+  margin-right: 10px; 
+}
+
+.company-name {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.auth {
+  margin-top: 100px; 
+}
+
+

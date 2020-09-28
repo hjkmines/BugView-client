@@ -27,9 +27,9 @@ const Navbar = () => {
                     search
                 </i>
                 </li>,
-                <li key='2'><Link to="/profile">My Profile</Link></li>, 
-                <li key='3'><Link to="/myfollowerspost">My Teams Tickets</Link></li>, 
-                <li key='4'><Link to="/createpost">Create New Ticket</Link></li>,
+                <li key='2'><Link to="/profile" className='link-title'>My Profile</Link></li>, 
+                <li key='3'><Link to="/myfollowerspost" className='link-title'>My Teams Tickets</Link></li>, 
+                <li key='4'><Link to="/createpost" className='link-title'>Create New Ticket</Link></li>,
                 <li key='5'>
                     <button 
                         className='btn #c62828 red darken-3' 
@@ -45,8 +45,8 @@ const Navbar = () => {
             ]
         } else {
             return [
-                <li key='6'><Link to="/login">Log In</Link></li>,
-                <li key='7'><Link to="/signup">Register</Link></li>
+                <li key='6'><Link to="/login" className='link-title'>Log In</Link></li>,
+                <li key='7'><Link to="/signup" className='link-title'>Register</Link></li>
             ]
         }
     }
@@ -71,9 +71,9 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav>
+            <nav className='navigation'>
                 <div class="nav-wrapper">
-                    <Link to={ state ? "/" : "/login" } className="brand-logo left">BugView</Link>
+                    <Link to={ state ? "/" : "/login" } className="brand-logo left" style={{ marginLeft: '20px' }}><i className='large material-icons'>bug_report</i>BugView</Link>
                         <ul id="nav-mobile" className="right">
                         {renderedList()}
                         </ul>

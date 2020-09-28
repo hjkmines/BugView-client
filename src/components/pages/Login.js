@@ -42,9 +42,9 @@ const Login = () => {
     }
 
     return (
-        <div className='mycard'>
+        <div className='mycard auth'>
         <div className='card auth-card input field'>
-            <h2>BugView</h2>
+            <h2 className='company-name'><i className='large material-icons'>bug_report</i><span>BugView</span></h2>
             <input 
                 type='text'
                 placeholder='Email'
@@ -53,22 +53,26 @@ const Login = () => {
             />
             <input 
                 type='password'
-                placeholder='password'
+                placeholder='Password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button 
-                className='btn waves-effect waves-light #64b5f6 blue lighten-2' 
+                className='btn waves-effect waves-light #64b5f6 blue darken-1' 
                 onClick={() => PostData()}
+                style={{ marginTop: '20px', marginBottom: '20px' }}
             >
-                Submit
+                Log In 
             </button>
             <h5>
                 <Link to='/signup'>Need an account?</Link>
             </h5>
             <h5>
-                <Link to='/reset'>Forgot your password?</Link>
+                {/* <Link to='/reset'>Forgot your password?</Link> */}
             </h5>
+        </div>
+        <div className='auth1'>
+
         </div>
         </div>
     )
