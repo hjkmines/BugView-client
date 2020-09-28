@@ -44,3 +44,11 @@
 .material-icon:hover {
   cursor: pointer; 
 }
+
+.material-icons:hover {
+  cursor: pointer; 
+}
+
+.collection-item {
+  width: 100%
+}
