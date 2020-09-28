@@ -120,18 +120,17 @@ const Profile = () => {
                 userProfile.posts.map(item => {
                     return(
                         <div className='card home-card' key={item._id}>
-                            <h5>{item.postedBy.name}</h5>
-                            <h5>{state.firstName}</h5>
+                        <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
+                            <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
+                            {/* <h5 style={{ marginLeft: '10px' }}><strong>Posted By: </strong>{state.firstName} {state.lastName}</h5> */}
                             <div className='card-image'>
-                            <h5>{item.title}</h5> 
                             </div>
                             <div className='card-content'>
-                            <i className="material-icons" style={ {color: 'red'} }>add</i>
-                                <h6>{item.body}</h6>
-                                <p>{item.due}</p>
-                                <p>{item.github}</p>
-                                <p>{item.teamMembers}</p>
-                                <p>{item.severity}</p>
+                                <h6><strong>Deadline: </strong>{item.due}</h6>
+                                <h6><strong>Source Code: </strong>{item.github}</h6>
+                                <h6><strong>Severity: </strong>{item.severity}</h6>
+                                <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
+                                <h6><strong>Ticket Summary: </strong>{item.body}</h6>
                             </div>
                         </div>
                     )

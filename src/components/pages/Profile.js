@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'; 
 import { UserContext } from '../../App'; 
+import { Link } from 'react-router-dom' ;
 
 const Profile = () => {
-
+    const [data, setData] = useState([]); 
     const [myPosts, setMyPosts] = useState([]); 
     const { state, dispatch } = useContext(UserContext); 
     const [image, setImage] = useState('') ;
@@ -58,6 +59,48 @@ const Profile = () => {
     const updateImage = (file) => {
         setImage(file)
     }
+
+    const makeComment = (text, postId) => {
+        fetch('/comment', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }, 
+            body: JSON.stringify({
+                postId, 
+                text
+            })
+        }).then(res => res.json())
+        .then(result => {
+            const newData = data.map(item => {
+                if(item._id == result._id) {
+                    return result 
+                } else {
+                    return item 
+                }
+            })
+            setData(newData)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    const deletePost = (postid) => {
+        fetch(`/deletepost/${postid}`, {
+            method: 'DELETE', 
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }
+        }).then(res => res.json())
+        .then(result => {
+            const newData = data.filter(item => {
+                return item._id !== result._id 
+            })
+            setData(newData)
+            window.location.reload(); 
+        })
+    }
     
     return (
         <div style={{ maxWidth: '1200px', margin: '0px auto' }}>
@@ -93,19 +136,43 @@ const Profile = () => {
                 myPosts.map(item => {
                     return(
                         <div className='card home-card' key={item._id}>
-                            <h5>{item.postedBy.name}</h5>
-                            <h5>{state.firstName}</h5>
+                            <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
+                            <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
+                            {/* <h5>{item.postedBy.name}</h5> */}
+                            {/* <h5 style={{marginLeft: '10px'}}>{state.firstName} {state.lastName}</h5> */}
+                            <h6 style={{ marginLeft: '10px', textAlign: 'center' }}><strong>Posted By: </strong> <Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile'}>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
+                            && <i 
+                                className="material-icons" 
+                                style={{ float: 'right', marginRight: '15px'}}
+                                onClick={() => deletePost(item._id)}
+                                >
+                                delete
+                            </i>
+                            
+                            }
+                            </h6>
                             <div className='card-image'>
-                            <h5>{item.title}</h5> 
                             </div>
                             <div className='card-content'>
-                            <i className="material-icons" style={ {color: 'red'} }>add</i>
-                                <h6>{item.body}</h6>
-                                <p>{item.due}</p>
-                                <p>{item.github}</p>
-                                <p>{item.teamMembers}</p>
-                                <p>{item.severity}</p>
+                                <h6><strong>Deadline: </strong>{item.due}</h6>
+                                <h6><strong>Source Code: </strong>{item.github}</h6>
+                                <h6><strong>Severity: </strong>{item.severity}</h6>
+                                <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
+                                <h6><strong>Ticket Summary: </strong>{item.body}</h6>
                             </div>
+                            {/* <form onSubmit={(e) => {
+                                    // e.preventDefault()
+                                    makeComment(e.target[0].value, item._id)
+                                }}>
+                                    <input type='text' placeholder='Add a comment' /> 
+                                </form>
+                                {
+                                    item.comments.map(record => {
+                                        return (
+                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}>{record.postedBy.firstName} {record.postedBy.lastName}:</span> {record.text}</h6>
+                                        )
+                                    })
+                                } */}
                         </div>
                     )
                 })

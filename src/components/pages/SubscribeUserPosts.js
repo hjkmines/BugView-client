@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'; 
 import { UserContext } from '../../App'; 
 import { Link } from 'react-router-dom'; 
+import 'materialize-css';
+import { Button, Modal } from 'react-materialize';
 
 const Home = () => {
     const [data, setData] = useState([]); 
@@ -90,7 +92,9 @@ const Home = () => {
                 data.map( item => {
                     return (
                         <div className='card home-card' key={item._id}>
-                            <h5><Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile' }>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
+                        <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
+                            <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
+                            <h5 style={{ marginLeft: '10px', textAlign: 'center' }}><strong>Posted By: </strong><Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile' }>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
                             && <i 
                                 className="material-icons" 
                                 style={{ float: 'right' }}
@@ -101,36 +105,53 @@ const Home = () => {
                             
                             }</h5>
                             <div className='card-image'>
-                            <h5>{item.title}</h5> 
                             
                             </div>
                             <div className='card-content'>
-                            <i 
-                                className="material-icons" 
-                                style={ {color: 'red'} }
-                                onClick={() => {likePost(item._id)}}
-                            >
-                                add
-                            </i>
-                                <h6>{item.body}</h6>
-                                <p>{item.due}</p>
-                                <p>{item.github}</p>
-                                <p>{item.teamMembers}</p>
-                                <p>{item.severity}</p>
-                                <p>{item.likes.length} likes</p>
-                                {
-                                    item.comments.map(record => {
-                                        return (
-                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}>{record.postedBy.firstName} {record.postedBy.lastName}</span>{record.text}</h6>
-                                        )
-                                    })
-                                }
+                                <h6><strong>Deadline: </strong>{item.due}</h6>
+                                <h6><strong>Source Code: </strong>{item.github}</h6>
+                                <h6><strong>Severity: </strong>{item.severity}</h6>
+                                <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
+                                <h6><strong>Ticket Summary: </strong>{item.body}</h6>
                                 <form onSubmit={(e) => {
                                     e.preventDefault()
                                     makeComment(e.target[0].value, item._id)
                                 }}>
                                     <input type='text' placeholder='Add a comment' /> 
                                 </form>
+                                <Modal
+                                    actions={[
+                                        <Button flat modal="close" node="button" waves="green">Close</Button>
+                                    ]}
+                                    bottomSheet={false}
+                                    fixedFooter
+                                    header="Modal Header"
+                                    id="Modal-0"
+                                    open={false}
+                                    options={{
+                                        dismissible: true,
+                                        endingTop: '10%',
+                                        inDuration: 250,
+                                        onCloseEnd: null,
+                                        onCloseStart: null,
+                                        onOpenEnd: null,
+                                        onOpenStart: null,
+                                        opacity: 0.5,
+                                        outDuration: 250,
+                                        preventScrolling: true,
+                                        startingTop: '4%'
+                                    }}
+                                    // root={[object HTMLBodyElement]}
+                                    trigger={<div style={{ display: 'flex', justifyContent: 'center' }}><Button node="button">Comments {item.comments.length}</Button></div>}
+                                    >
+                                    {
+                                    item.comments.map(record => {
+                                        return (
+                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}> {record.postedBy.firstName} {record.postedBy.lastName}: </span>{record.text}</h6>
+                                        )
+                                    })
+                                    }
+                                </Modal>
                             </div>
                         </div>
                     )
