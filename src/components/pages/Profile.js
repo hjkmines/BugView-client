@@ -11,7 +11,14 @@ const Profile = () => {
     const [myPosts, setMyPosts] = useState([]); 
     const { state, dispatch } = useContext(UserContext); 
     const [image, setImage] = useState('') ;
-    // const [url, setUrl] = useState(undefined); 
+    const history = useHistory(); 
+    const [title, setTitle] = useState(''); 
+    const [body, setBody] = useState(''); 
+    const [due, setDue] = useState(''); 
+    const [github, setGithub] = useState(''); 
+    const [teamMembers, setTeamMembers] = useState(''); 
+    const [severity, setSeverity] = useState(''); 
+    const [status, setStatus] = useState(''); 
 
     useEffect(() => {       
 
@@ -24,6 +31,37 @@ const Profile = () => {
             setMyPosts(result.mypost)
         })
     }, [])
+
+    const updateDetails = () => {
+
+        fetch('/createpost', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }, 
+            body: JSON.stringify({
+                title, 
+                body, 
+                due, 
+                github, 
+                teamMembers, 
+                severity, 
+                status
+            })
+        }).then(res => res.json())
+        .then(data => {
+            if(data.error) {
+                console.log(data)
+                M.toast({ html: data.error, classes: '#c62828 red darken-3' })
+            } else {
+                M.toast({ html: 'Ticket Submitted Successfully', classes: '#43a047 green darken-1' })
+                history.push('/')
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     useEffect(() => {
         if (image) {
@@ -191,12 +229,162 @@ const Profile = () => {
                                 <h6 style={{textAlign: 'center'}}><strong>Last Update: </strong>{(item.updatedAt).toString().split('').slice(11,19)} {(item.updatedAt).toString().split('').slice(0,10)}</h6>
                                 <br/>
                                 <h6 style={{textAlign: 'center'}}><strong>Status: </strong>{item.status === 'Pending' ? <span>⌛</span> : item.status === 'Completed' ? <span>✔️</span> : null} {item.status}</h6>
-                                <br/>
+                                <Modal
+                                    actions={[
+                                        <Button flat modal="close" node="button" waves="green">Close</Button>
+                                    ]}
+                                    style={{textAlign: 'center', height: '700px'}}
+                                    bottomSheet={false}
+                                    fixedFooter
+                                    header="Update Ticket"
+                                    id="Modal-0"
+                                    open={false}
+                                    options={{
+                                        dismissible: true,
+                                        endingTop: '10%',
+                                        inDuration: 250,
+                                        onCloseEnd: null,
+                                        onCloseStart: null,
+                                        onOpenEnd: null,
+                                        onOpenStart: null,
+                                        opacity: 0.5,
+                                        outDuration: 250,
+                                        preventScrolling: true,
+                                        startingTop: '4%'
+                                    }}
+                                    // root={[object HTMLBodyElement]}
+                                    trigger={<div style={{ display: 'flex', justifyContent: 'center' }}><Button node="button">Update Ticket</Button></div>}
+                                    >
+                                
+
+                                    <div 
+                                    className='card input-filled'
+                                    style={{
+                                        margin: '30px auto', 
+                                        maxWidth: '1200px', 
+                                        padding: '20px', 
+                                        textAlign: 'center', 
+                                        marginTop: '25px'
+                                    }}
+                                >
+                                    {/* <div style={{fontSize: '30px', marginBottom: '10px'}}><strong>Update Ticket</strong></div> */}
+                                    <input 
+                                        type='text' 
+                                        // placeholder={item.due}
+                                        // default={item.due}
+                                        value={item.due !== due ? item.due : due}
+                                        onChange={(e) => setDue(e.target.value)}
+                                        style={{marginBottom: '25px'}}
+                                    /> 
+                                    <input 
+                                        type='text' 
+                                        value={item.title !== title ? item.title : title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                        style={{marginBottom: '25px'}}
+                                    />
+                                    <input 
+                                        type='text' 
+                                        value={item.body !== body ? item.body : body}
+                                        onChange={(e) => setBody(e.target.value)}
+                                        style={{marginBottom: '25px'}}
+                                    />
+                                    <input 
+                                        type='text' 
+                                        value={item.github !== github ? item.github : github}
+                                        onChange={(e) => setGithub(e.target.value)}
+                                        style={{marginBottom: '25px'}}
+                                    />
+                                    <input 
+                                        type='text' 
+                                        placeholder={item.teamMembers}
+                                        value={item.teamMembers !== teamMembers ? item.teamMembers : teamMembers}
+                                        onChange={(e) => setTeamMembers(e.target.value)}
+                                        style={{marginBottom: '10px'}}
+                                    />
+                                        <Select
+                                            id="Select-9"
+                                            style={{marginBottom: '25px'}}
+                                            multiple={false}
+                                            onChange={function noRefCheck(){}}
+                                            options={{
+                                                classes: '',
+                                                dropdownOptions: {
+                                                alignment: 'left',
+                                                autoTrigger: true,
+                                                closeOnClick: true,
+                                                constrainWidth: true,
+                                                coverTrigger: true,
+                                                hover: false,
+                                                inDuration: 150,
+                                                onCloseEnd: null,
+                                                onCloseStart: null,
+                                                onOpenEnd: null,
+                                                onOpenStart: null,
+                                                outDuration: 250
+                                                }
+                                            }}
+                                            value=""
+                                            value={severity}
+                                            onChange={(e) => setSeverity(e.target.value)}
+                                            >
+                                            <option
+                                                disabled
+                                                value=""
+                                            >
+                                             {item.severity !== severity ? item.severity : severity}
+                                            </option>
+                                            <option value="High">🔴 High</option>
+                                            <option value="Moderate">🟢 Moderate</option>
+                                            <option value="Low">🟡 Low</option>
+                                        </Select>
+                                        <Select
+                                            id="Select-9"
+                                            style={{marginBottom: '25px'}}
+                                            multiple={false}
+                                            onChange={function noRefCheck(){}}
+                                            options={{
+                                                classes: '',
+                                                dropdownOptions: {
+                                                alignment: 'left',
+                                                autoTrigger: true,
+                                                closeOnClick: true,
+                                                constrainWidth: true,
+                                                coverTrigger: true,
+                                                hover: false,
+                                                inDuration: 150,
+                                                onCloseEnd: null,
+                                                onCloseStart: null,
+                                                onOpenEnd: null,
+                                                onOpenStart: null,
+                                                outDuration: 250
+                                                }
+                                            }}
+                                            value=""
+                                            value={status}
+                                            onChange={(e) => setStatus(e.target.value)}
+                                            >
+                                            <option
+                                                disabled
+                                                value=""
+                                            >
+                                             {item.status !== status ? item.status : status}
+                                            </option>
+                                            <option value="Pending">⌛ Pending</option>
+                                            <option value="Completed">✔️ Completed</option>
+                                        </Select>
+                                    <button 
+                                        className='btn waves-effect waves-light #64b5f6 blue darken-1' 
+                                        onClick={() => updateDetails()}
+                                    >
+                                        Submit Ticket 
+                                    </button>
+                                </div>
+                                </Modal>
                             <div className='card-image'>
                             </div>
                             <div className='card-content' style={{paddingTop: '0'}}>
                                 <h6><strong>Deadline: </strong>{item.due}</h6>
-                                <h6><strong>Source Code: </strong>{item.github}</h6>
+                                <h6><strong>Source Code: </strong><a href={item.github}>{item.github}</a></h6>
                                 <h6><strong>Severity: </strong>{item.severity} {item.severity === 'High' ? <span>🔴</span> : item.severity === 'Moderate' ? <span>🟢</span> : item.severity === 'Low' ? <span>🟡</span> : null}</h6>
                                 <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
                                 <h6><strong>Ticket Summary: </strong>{item.body}</h6>

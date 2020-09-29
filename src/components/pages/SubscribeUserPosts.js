@@ -113,7 +113,7 @@ const Home = () => {
                             </div>
                             <div className='card-content' style={{paddingTop: '0'}}>
                                 <h6><strong>Deadline: </strong>{item.due}</h6>
-                                <h6><strong>Source Code: </strong>{item.github}</h6>
+                                <h6><strong>Source Code: </strong><a href={item.github}>{item.github}</a></h6>
                                 <h6><strong>Severity: </strong>{item.severity} {item.severity === 'High' ? <span>🔴</span> : item.severity === 'Moderate' ? <span>🟢</span> : item.severity === 'Low' ? <span>🟡</span> : null}</h6>
                                 <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
                                 <h6><strong>Ticket Summary: </strong>{item.body}</h6>
