@@ -291,35 +291,38 @@ const Home = () => {
 
     return (
         <div>
-        <div>
-            <div style={{fontSize: '30px', textAlign: 'center'}}>
-            Your Dashboard
+            <div style={{fontSize: '30px', textAlign: 'center', fontSize: '40px', marginTop: '10px'}}>
+            <strong>Dashboard</strong>
             </div>
+        <div style={{margin: '20px 20px 20px 20px', borderRadius: '30px', border: '10px solid #73AD21'}}>
             <div style={{display: 'flex', justifyContent: 'space-around', flexDirection: 'row'}}>
-                <div>
-                <Doughnut 
-                data={statusChart}
-                width={300}
-                height={300}
-                options={{ maintainAspectRatio: false }}
-                />
-                </div>
-                <div>
+                <div style={{ textAlign: 'center' }}>
+                <span><strong>Ticket Severities</strong></span>
                 <Bar
                 data={severityChart}
                 width={400}
-                height={350}
+                height={100}
                 options={{
                 maintainAspectRatio: false, 
                 legend: false 
                 }}
                 />
                 </div>
-                <div>
+                <div style={{ textAlign: 'center' }}>
+                <span><strong>Ticket Status</strong></span>
+                <Doughnut 
+                data={statusChart}
+                width={300}
+                height={100}
+                options={{ maintainAspectRatio: false }}
+                />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                <span><strong># of tickets posted/month</strong></span>
                 <Line 
                 data={postedTicket}
                 width={400}
-                height={350}
+                height={100}
                 options={{
                 maintainAspectRatio: false, 
                 legend: false 
