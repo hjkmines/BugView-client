@@ -23,6 +23,8 @@ const CreatePost = () => {
     const [teamMembers, setTeamMembers] = useState(''); 
     const [severity, setSeverity] = useState(''); 
     const [status, setStatus] = useState(''); 
+    const [language, setLanguage] = useState(''); 
+    const [framework, setFramework] = useState(''); 
 
     //     // The first commit of Material-UI
     // const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -140,6 +142,113 @@ const CreatePost = () => {
                     <option value="High">🔴 High</option>
                     <option value="Moderate">🟢 Moderate</option>
                     <option value="Low">🟡 Low</option>
+                </Select>
+                <Select
+                    id="Select-9"
+                    style={{marginBottom: '25px'}}
+                    multiple={false}
+                    onChange={function noRefCheck(){}}
+                    options={{
+                        classes: '',
+                        dropdownOptions: {
+                        alignment: 'left',
+                        autoTrigger: true,
+                        closeOnClick: true,
+                        constrainWidth: true,
+                        coverTrigger: true,
+                        hover: false,
+                        inDuration: 150,
+                        onCloseEnd: null,
+                        onCloseStart: null,
+                        onOpenEnd: null,
+                        onOpenStart: null,
+                        outDuration: 250
+                        }
+                    }}
+                    value=""
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                    >
+                    <option
+                        disabled
+                        value=""
+                    >
+                        Choose Language
+                    </option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="TypeScript">TypeScript</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="C++">C++</option>
+                    <option value="C">C</option>
+                    <option value="C#">C#</option>
+                    <option value="HTML/CSS">HTML/CSS</option>
+                    <option value="Go">Go</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Perl">Perl</option>
+                    <option value="Scala">Scala</option>
+                    <option value="Rust">Rust</option>
+                    <option value="Kotlin">Kotlin</option>
+                    <option value="Julia">Julia</option>
+                    <option value="Dart">Dart</option>
+                    <option value="Swift">Swift</option>
+                    <option value="SQL">SQL</option>
+                    <option value="Haskell">Haskell</option>
+                    <option value="R">R</option>
+                    <option value="VBA">VBA</option>
+                    <option value="Objective-C">Objective-C</option>
+                    <option value="Assembly">Assembly</option>
+                </Select>
+                <Select
+                    id="Select-9"
+                    style={{marginBottom: '25px'}}
+                    multiple={false}
+                    onChange={function noRefCheck(){}}
+                    options={{
+                        classes: '',
+                        dropdownOptions: {
+                        alignment: 'left',
+                        autoTrigger: true,
+                        closeOnClick: true,
+                        constrainWidth: true,
+                        coverTrigger: true,
+                        hover: false,
+                        inDuration: 150,
+                        onCloseEnd: null,
+                        onCloseStart: null,
+                        onOpenEnd: null,
+                        onOpenStart: null,
+                        outDuration: 250
+                        }
+                    }}
+                    value=""
+                    value={framework}
+                    onChange={(e) => setFramework(e.target.value)}
+                    >
+                    <option
+                        disabled
+                        value=""
+                    >
+                        Choose Framework
+                    </option>
+                    <option value="None">None</option>
+                    <option value="ASP.NET CORE">ASP.NET CORE</option>
+                    <option value="React.js">React.js</option>
+                    <option value="Vue.js">Vue.js</option>
+                    <option value="Express.js">Express.js</option>
+                    <option value="Gatsby">Gatsby</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Django">Django</option>
+                    <option value="Flask">Flask</option>
+                    <option value="Angular">Angular</option>
+                    <option value="Laravel">Laravel</option>
+                    <option value="Ruby on Rails">Ruby on Rails</option>
+                    <option value="Symfony">Symfony</option>
+                    <option value="ASP.NET">ASP.NET</option>
+                    <option value="jQuery">jQuery</option>
+                    <option value="Drupal">Drupal</option>
+                    <option value="Angular.js">Angular.js</option>
                 </Select>
                 <Select
                     id="Select-9"

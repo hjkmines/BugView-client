@@ -5,6 +5,7 @@ import 'materialize-css';
 import { useHistory } from 'react-router-dom'; 
 import M from 'materialize-css'; 
 import { Button, Modal, Select } from 'react-materialize';
+import {Doughnut} from 'react-chartjs-2';
 
 const Home = () => {
     const [data, setData] = useState([]); 
@@ -17,6 +18,27 @@ const Home = () => {
     const [teamMembers, setTeamMembers] = useState(''); 
     const [severity, setSeverity] = useState(''); 
     const [status, setStatus] = useState(''); 
+
+    const dataChart = {
+        labels: [
+            'Red',
+            'Green',
+            'Yellow'
+        ],
+        datasets: [{
+            data: [300, 50, 100],
+            backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56'
+            ],
+            hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56'
+            ]
+        }]
+    };
 
     useEffect(() => {
         fetch('/allpost', {
@@ -128,6 +150,11 @@ const Home = () => {
     }
 
     return (
+        <div>
+        <div>
+            <h2>Doughnut Example</h2>
+            <Doughnut data={dataChart} />
+        </div>
         <div className='home'>
             {
                 data.map( item => {
@@ -368,6 +395,7 @@ const Home = () => {
                     )
                 })
             }
+        </div>
         </div>
     )
 }; 

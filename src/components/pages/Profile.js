@@ -200,8 +200,8 @@ const Profile = () => {
                     }</h5>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '108%' }}>
                         <h5><strong>{myPosts.length}</strong> ticket(s) posted</h5>
-                        <h5><strong>{state ? state.followers.length : '0'}</strong> associated members</h5>
-                        {/* <h5>{state ? state.following.length : '0'} following</h5> */}
+                        {/* <h5><strong>{state ? state.followers.length : '0'}</strong> associated members</h5> */}
+                        <h5><strong>{state ? state.following.length : '0'}</strong> associated members</h5>
                     </div>
                 </div>
             </div>
