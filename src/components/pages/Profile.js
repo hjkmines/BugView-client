@@ -108,7 +108,15 @@ const Profile = () => {
                 <div>
                     <img 
                     style={{ width: '240px', height: '240px', borderRadius: '160px', marginLeft: 'auto', marginRight: 'auto', display: 'block' }} 
-                    src={state ? state.image : 'loading'}
+                    src={state ? state.image 
+                    : 
+                    <div>
+                        <div style={{ textAlign: 'center' }}>Loading...</div>
+                        <div class="progress" style={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
+                        <div class="indeterminate"></div>
+                        </div>
+                    </div>
+                    }
                     />
                     <div className='file-field input-field' style={{ display: 'flex', justifyContent: 'center' }}>
                         <div className='btn #64b5f6 blue darken-1' style={{ marginBottom: '15px' }}>
@@ -121,9 +129,33 @@ const Profile = () => {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <h5><strong>Name: </strong> {state ? (state.firstName + " " + state.lastName) : 'Loading'}</h5>
-                    <h5><strong>Email: </strong> {state ? (state.email) : 'Loading'}</h5>
-                    <h5><strong>Job Title: </strong>{state ? (state.jobTitle) : 'Loading'}</h5>
+                    <h5><strong>Name: </strong> {state ? (state.firstName + " " + state.lastName) 
+                    : 
+                    <div>
+                        <div style={{ textAlign: 'center' }}>Loading...</div>
+                        <div class="progress" style={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
+                        <div class="indeterminate"></div>
+                        </div>
+                    </div>
+                    }</h5>
+                    <h5><strong>Email: </strong> {state ? (state.email) 
+                    : 
+                    <div>
+                        <div style={{ textAlign: 'center' }}>Loading...</div>
+                        <div class="progress" style={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
+                        <div class="indeterminate"></div>
+                        </div>
+                    </div>
+                    }</h5>
+                    <h5><strong>Job Title: </strong>{state ? (state.jobTitle) 
+                    : 
+                    <div>
+                        <div style={{ textAlign: 'center' }}>Loading...</div>
+                        <div class="progress" style={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
+                        <div class="indeterminate"></div>
+                        </div>
+                    </div>
+                    }</h5>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '108%' }}>
                         <h5><strong>{myPosts.length}</strong> ticket(s) posted</h5>
                         <h5><strong>{state ? state.followers.length : '0'}</strong> associated members</h5>

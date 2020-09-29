@@ -28,7 +28,7 @@ const Navbar = () => {
                 </i>
                 </li>,
                 <li key='2'><Link to="/profile" className='link-title'>My Profile</Link></li>, 
-                <li key='3'><Link to="/myfollowerspost" className='link-title'>My Teams Tickets</Link></li>, 
+                <li key='3'><Link to="/myfollowerspost" className='link-title'>My Team's Tickets</Link></li>, 
                 <li key='4'><Link to="/createpost" className='link-title'>Create New Ticket</Link></li>,
                 <li key='5'>
                     <button 

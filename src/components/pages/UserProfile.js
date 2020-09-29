@@ -139,7 +139,12 @@ const Profile = () => {
             </div>
         </div>
 
-        : <h2>Loading...</h2>}
+        : <h2>
+            <div style={{ textAlign: 'center' }}>Loading...</div>
+            <div class="progress" style={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
+                <div class="indeterminate"></div>
+            </div>
+        </h2>}
         
         </>
     )
