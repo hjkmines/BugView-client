@@ -8,6 +8,7 @@ import Signup from './components/pages/Signup';
 import CreatePost from './components/pages/CreatePost'; 
 import UserProfile from './components/pages/UserProfile'; 
 import SubscribeUserPosts from './components/pages/SubscribeUserPosts';
+import AllTickets from './components/pages/AllTickets'; 
 import Reset from './components/pages/Reset';  
 import NewPassword from './components/pages/NewPassword'; 
 import { reducer, initialState} from './reducers/userReducer'; 
@@ -46,6 +47,9 @@ const Routing = () => {
       </Route>
       <Route path='/createpost'>
         <CreatePost /> 
+      </Route>
+      <Route path='/alltickets'>
+        <AllTickets /> 
       </Route>
       <Route path='/profile/:userid'>
         <UserProfile /> 
