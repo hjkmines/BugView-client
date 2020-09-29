@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'; 
 import { UserContext } from '../../App'; 
 import { Link } from 'react-router-dom' ;
+import 'materialize-css';
+import { useHistory } from 'react-router-dom'; 
+import M from 'materialize-css'; 
+import { Button, Modal, Select } from 'react-materialize';
 
 const Profile = () => {
     const [data, setData] = useState([]); 
