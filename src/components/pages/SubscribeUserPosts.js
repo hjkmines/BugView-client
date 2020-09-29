@@ -320,7 +320,8 @@ const Home = () => {
                                     ]}
                                     bottomSheet={false}
                                     fixedFooter
-                                    header="Modal Header"
+                                    header="Comments"
+                                    style={{marginBottom: '20px'}}
                                     id="Modal-0"
                                     open={false}
                                     options={{
@@ -337,12 +338,12 @@ const Home = () => {
                                         startingTop: '4%'
                                     }}
                                     // root={[object HTMLBodyElement]}
-                                    trigger={<div style={{ display: 'flex', justifyContent: 'center' }}><Button node="button">Comments {item.comments.length}</Button></div>}
+                                    trigger={<div style={{ display: 'flex', justifyContent: 'center' }}><Button node="button">{item.comments.length} Comments</Button></div>}
                                     >
                                     {
                                     item.comments.map(record => {
                                         return (
-                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}> {record.postedBy.firstName} {record.postedBy.lastName}: </span>{record.text}</h6>
+                                            <h6 key={record._id}><span style={{ fontWeight: '500', marginTop: '10px', marginBottom: '10px' }}>{record.postedBy.firstName} {record.postedBy.lastName}: </span>{record.text}</h6>
                                         )
                                     })
                                     }

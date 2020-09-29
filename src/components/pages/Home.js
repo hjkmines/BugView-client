@@ -338,7 +338,7 @@ const Home = () => {
                                     header="Comments"
                                     id="Modal-0"
                                     open={false}
-                                    style={{marginBottom: '10px'}}
+                                    style={{marginBottom: '20px'}}
                                     options={{
                                         dismissible: true,
                                         endingTop: '10%',
@@ -358,7 +358,7 @@ const Home = () => {
                                 {
                                     item.comments.map(record => {
                                         return (
-                                            <h6 key={record._id}><span style={{ fontWeight: '500' }}>{record.postedBy.firstName} {record.postedBy.lastName}:</span> {record.text}</h6>
+                                            <h6 key={record._id}><span style={{ fontWeight: '500', marginTop: '10px', marginBottom: '10px' }}>{record.postedBy.firstName} {record.postedBy.lastName}:</span> {record.text}</h6>
                                         )
                                     })
                                 }
