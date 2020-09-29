@@ -94,7 +94,7 @@ const Home = () => {
                         <div className='card home-card' key={item._id}>
                             <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
                             <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
-                            <h6 style={{ marginLeft: '10px', textAlign: 'center' }}><strong>Posted By: </strong> <Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile'}>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
+                            <h5 style={{ marginLeft: '10px', textAlign: 'center' }}><strong>Posted By: </strong> <Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile'}>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
                             && <i 
                                 className="material-icons" 
                                 style={{ float: 'right', marginRight: '15px'}}
@@ -104,21 +104,19 @@ const Home = () => {
                             </i>
                             
                             }
-                            </h6>
+                            </h5>
                             <div className='card-image'>
                             
                             </div>
-                            <div className='card-content'>
-                            {/* <i 
-                                className="material-icons" 
-                                style={ {color: 'red'} }
-                                onClick={() => {likePost(item._id)}}
-                            >
-                                add
-                            </i> */}
+                            <div className='card-content' style={{paddingTop: '0'}}>
+                                <h6 style={{textAlign: 'center'}}><strong>Posted At: </strong>{(item.createdAt).toString().split('').slice(11,19)} {(item.createdAt).toString().split('').slice(0,10)}</h6>
+                                <h6 style={{textAlign: 'center'}}><strong>Last Update: </strong>{(item.updatedAt).toString().split('').slice(11,19)} {(item.updatedAt).toString().split('').slice(0,10)}</h6>
+                                <br/>
+                                <h6 style={{textAlign: 'center'}}><strong>Status: </strong>{item.status === 'Pending' ? <span>⌛</span> : item.status === 'Completed' ? <span>✔️</span> : null} {item.status}</h6>
+                                <br/>
                                 <h6><strong>Deadline: </strong>{item.due}</h6>
                                 <h6><strong>Source Code: </strong>{item.github}</h6>
-                                <h6><strong>Severity: </strong>{item.severity}</h6>
+                                <h6><strong>Severity: </strong>{item.severity} {item.severity === 'High' ? <span>🔴</span> : item.severity === 'Moderate' ? <span>🟢</span> : item.severity === 'Low' ? <span>🟡</span> : null}</h6>
                                 <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
                                 <h6><strong>Ticket Summary: </strong>{item.body}</h6>
                                 {/* <p>{item.likes.length} likes</p> */}
@@ -143,9 +141,10 @@ const Home = () => {
                                     ]}
                                     bottomSheet={false}
                                     fixedFooter
-                                    header="Modal Header"
+                                    header="Comments"
                                     id="Modal-0"
                                     open={false}
+                                    style={{marginBottom: '10px'}}
                                     options={{
                                         dismissible: true,
                                         endingTop: '10%',
@@ -160,7 +159,7 @@ const Home = () => {
                                         startingTop: '4%'
                                     }}
                                     // root={[object HTMLBodyElement]}
-                                    trigger={<div style={{ display: 'flex', justifyContent: 'center' }}><Button node="button">Comments {item.comments.length}</Button></div>}
+                                    trigger={<div style={{ display: 'flex', justifyContent: 'center' }}><Button node="button">{item.comments.length} Comments</Button></div>}
                                     >
                                 {
                                     item.comments.map(record => {

@@ -104,13 +104,17 @@ const Home = () => {
                             </i>
                             
                             }</h5>
+                            <h6 style={{textAlign: 'center'}}><strong>Posted At: </strong>{(item.createdAt).toString().split('').slice(11,19)} {(item.createdAt).toString().split('').slice(0,10)}</h6>
+                                <h6 style={{textAlign: 'center'}}><strong>Last Update: </strong>{(item.updatedAt).toString().split('').slice(11,19)} {(item.updatedAt).toString().split('').slice(0,10)}</h6>
+                                <br/>
+                                <h6 style={{textAlign: 'center'}}><strong>Status: </strong>{item.status === 'Pending' ? <span>⌛</span> : item.status === 'Completed' ? <span>✔️</span> : null} {item.status}</h6>
+                                <br/>
                             <div className='card-image'>
-                            
                             </div>
-                            <div className='card-content'>
+                            <div className='card-content' style={{paddingTop: '0'}}>
                                 <h6><strong>Deadline: </strong>{item.due}</h6>
                                 <h6><strong>Source Code: </strong>{item.github}</h6>
-                                <h6><strong>Severity: </strong>{item.severity}</h6>
+                                <h6><strong>Severity: </strong>{item.severity} {item.severity === 'High' ? <span>🔴</span> : item.severity === 'Moderate' ? <span>🟢</span> : item.severity === 'Low' ? <span>🟡</span> : null}</h6>
                                 <h6><strong>Team Members: </strong>{item.teamMembers}</h6>
                                 <h6><strong>Ticket Summary: </strong>{item.body}</h6>
                                 <form onSubmit={(e) => {
