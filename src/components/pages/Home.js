@@ -5,7 +5,7 @@ import 'materialize-css';
 import { useHistory } from 'react-router-dom'; 
 import M from 'materialize-css'; 
 import { Button, Modal, Select } from 'react-materialize';
-import {Doughnut} from 'react-chartjs-2';
+import {Doughnut, Bar, Line} from 'react-chartjs-2';
 
 const Home = () => {
     const [data, setData] = useState([]); 
@@ -18,28 +18,26 @@ const Home = () => {
     const [teamMembers, setTeamMembers] = useState(''); 
     const [severity, setSeverity] = useState(''); 
     const [status, setStatus] = useState(''); 
-
-    const dataChart = {
-        labels: [
-            'Red',
-            'Green',
-            'Yellow'
-        ],
-        datasets: [{
-            data: [300, 50, 100],
-            backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
-            ],
-            hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
-            ]
-        }]
-    };
-
+    const [language, setFramework] = useState(''); 
+    const [framework, setLanguage] = useState(''); 
+    const [pending, setPending] = useState([]);
+    const [completed, setCompleted] = useState([]);
+    const [high, setHigh] = useState([]);
+    const [moderate, setModerate] = useState([]);
+    const [low, setLow] = useState([]);
+    const [jan, setJan] = useState([]);
+    const [feb, setFeb] = useState([]);
+    const [mar, setMar] = useState([]);
+    const [apr, setApr] = useState([]);
+    const [may, setMay] = useState([]);
+    const [jun, setJun] = useState([]);
+    const [jul, setJul] = useState([]);
+    const [aug, setAug] = useState([]);
+    const [sep, setSep] = useState([]);
+    const [oct, setOct] = useState([]);
+    const [nov, setNov] = useState([]);
+    const [dec, setDec] = useState([]);
+    
     useEffect(() => {
         fetch('/allpost', {
             headers: {
@@ -47,9 +45,149 @@ const Home = () => {
             }
         }).then(res => res.json())
         .then(result => {
-            setData(result.posts)
+            setData(result.posts) 
         })
     }, [])
+
+    useEffect(() => {
+        let pendingArray = []; 
+        let completedArray = []; 
+        let highArray = []; 
+        let moderateArray = []; 
+        let lowArray = []; 
+        let janArray = [];
+        let febArray = [];
+        let marArray = [];
+        let aprArray = [];
+        let mayArray = [];
+        let junArray = [];
+        let julArray = [];
+        let augArray = [];
+        let sepArray = [];
+        let octArray = [];
+        let novArray = [];
+        let decArray = [];
+        
+        data.forEach((element, index, array) => {
+            if (element.status === 'Pending') {
+                pendingArray.push(element.status)
+                setPending(pendingArray); 
+            } else if (element.status === 'Completed') {
+                completedArray.push(element.status)
+                setCompleted(completedArray)
+            }
+
+            if (element.severity === 'High') {
+                highArray.push(element.severity)
+                setHigh(highArray); 
+            } else if (element.severity === 'Moderate') {
+                moderateArray.push(element.severity)
+                setModerate(moderateArray)
+            } else if (element.severity === 'Low') {
+                lowArray.push(element.severity)
+                setLow(lowArray)
+            }
+
+            if (element.createdAt.split('').slice(5,7).join('').toString() === '01') {
+                janArray.push(element.createdAt)
+                setJan(janArray); 
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '02') {
+                febArray.push(element.createdAt)
+                setFeb(febArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '03') {
+                marArray.push(element.createdAt)
+                setMar(marArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '04') {
+                aprArray.push(element.createdAt)
+                setApr(aprArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '05') {
+                mayArray.push(element.createdAt)
+                setMay(mayArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '06') {
+                junArray.push(element.createdAt)
+                setJun(junArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '07') {
+                julArray.push(element.createdAt)
+                setJul(julArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '08') {
+                augArray.push(element.createdAt)
+                setAug(augArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '09') {
+                sepArray.push(element.createdAt)
+                setSep(sepArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '10') {
+                octArray.push(element.createdAt)
+                setOct(octArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '11') {
+                novArray.push(element.createdAt)
+                setNov(novArray)
+            } else if (element.createdAt.split('').slice(5,7).join('').toString() === '12') {
+                decArray.push(element.createdAt)
+                setDec(decArray)
+            }
+        })
+
+    }, [data])
+    
+    const statusChart = {
+        labels: [
+            'Completed',
+            'Pending'
+        ],
+        datasets: [{
+            data: [completed.length, pending.length],
+            backgroundColor: [
+                'green', 
+                '#FFCE56' 
+            ],
+            hoverBackgroundColor: [
+                'green', 
+                '#FFCE56' 
+            ]
+        }]
+    };
+
+    const severityChart = {
+        labels: ['High', 'Moderate', 'Low'],
+        datasets: [
+          {
+            // label: ['High', 'Moderate', 'Low'],
+            backgroundColor: ['#B22222','green', 'yellow'], 
+            borderColor: ['#DC143C', '#90EE90', '#F0E68C'],
+            borderWidth: 1,
+            hoverBackgroundColor: ['rgba(205, 92, 92, 0.4)', '#90EE90', '#F0E68C'],
+            hoverBorderColor: ['#DC143C','#90EE90', '#F0E68C'],
+            data: [high.length, moderate.length, low.length]
+          }
+        ]
+      };
+
+      const postedTicket = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+          {
+            // label: 'My First dataset',
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [jan.length, feb.length, mar.length, apr.length, may.length, jun.length, jul.length, aug.length, sep.length, oct.length, nov.length, dec.length]
+          }
+        ]
+      };
 
     const updateDetails = () => {
 
@@ -66,7 +204,9 @@ const Home = () => {
                 github, 
                 teamMembers, 
                 severity, 
-                status
+                status, 
+                language, 
+                framework
             })
         }).then(res => res.json())
         .then(data => {
@@ -152,8 +292,41 @@ const Home = () => {
     return (
         <div>
         <div>
-            <h2>Doughnut Example</h2>
-            <Doughnut data={dataChart} />
+            <div style={{fontSize: '30px', textAlign: 'center'}}>
+            Your Dashboard
+            </div>
+            <div style={{display: 'flex', justifyContent: 'space-around', flexDirection: 'row'}}>
+                <div>
+                <Doughnut 
+                data={statusChart}
+                width={300}
+                height={300}
+                options={{ maintainAspectRatio: false }}
+                />
+                </div>
+                <div>
+                <Bar
+                data={severityChart}
+                width={400}
+                height={350}
+                options={{
+                maintainAspectRatio: false, 
+                legend: false 
+                }}
+                />
+                </div>
+                <div>
+                <Line 
+                data={postedTicket}
+                width={400}
+                height={350}
+                options={{
+                maintainAspectRatio: false, 
+                legend: false 
+                }}
+                />
+                </div>
+            </div>
         </div>
         <div className='home'>
             {
@@ -170,7 +343,6 @@ const Home = () => {
                                 >
                                 delete
                             </i>
-                            
                             }
                             </h5>
                             <div className='card-image'>

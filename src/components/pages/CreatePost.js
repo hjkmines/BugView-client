@@ -44,7 +44,9 @@ const CreatePost = () => {
                 github, 
                 teamMembers, 
                 severity, 
-                status
+                status, 
+                language, 
+                framework
             })
         }).then(res => res.json())
         .then(data => {
@@ -166,6 +168,41 @@ const CreatePost = () => {
                         }
                     }}
                     value=""
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    >
+                    <option
+                        disabled
+                        value=""
+                    >
+                        Choose Status
+                    </option>
+                    <option value="Pending">⌛ Pending</option>
+                    <option value="Completed">✔️ Completed</option>
+                </Select>
+                <Select
+                    id="Select-9"
+                    style={{marginBottom: '25px'}}
+                    multiple={false}
+                    onChange={function noRefCheck(){}}
+                    options={{
+                        classes: '',
+                        dropdownOptions: {
+                        alignment: 'left',
+                        autoTrigger: true,
+                        closeOnClick: true,
+                        constrainWidth: true,
+                        coverTrigger: true,
+                        hover: false,
+                        inDuration: 150,
+                        onCloseEnd: null,
+                        onCloseStart: null,
+                        onOpenEnd: null,
+                        onOpenStart: null,
+                        outDuration: 250
+                        }
+                    }}
+                    value=""
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                     >
@@ -250,41 +287,7 @@ const CreatePost = () => {
                     <option value="Drupal">Drupal</option>
                     <option value="Angular.js">Angular.js</option>
                 </Select>
-                <Select
-                    id="Select-9"
-                    style={{marginBottom: '25px'}}
-                    multiple={false}
-                    onChange={function noRefCheck(){}}
-                    options={{
-                        classes: '',
-                        dropdownOptions: {
-                        alignment: 'left',
-                        autoTrigger: true,
-                        closeOnClick: true,
-                        constrainWidth: true,
-                        coverTrigger: true,
-                        hover: false,
-                        inDuration: 150,
-                        onCloseEnd: null,
-                        onCloseStart: null,
-                        onOpenEnd: null,
-                        onOpenStart: null,
-                        outDuration: 250
-                        }
-                    }}
-                    value=""
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    >
-                    <option
-                        disabled
-                        value=""
-                    >
-                        Choose Status
-                    </option>
-                    <option value="Pending">⌛ Pending</option>
-                    <option value="Completed">✔️ Completed</option>
-                </Select>
+                
             <button 
                 className='btn waves-effect waves-light #64b5f6 blue darken-1' 
                 onClick={() => postDetails()}
