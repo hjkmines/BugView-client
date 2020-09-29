@@ -210,7 +210,7 @@ const Profile = () => {
                 myPosts.map(item => {
                     return(
                         <div className='card home-card' key={item._id}>
-                            <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
+                        <div style={{ textAlign: 'center', backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '25px' }}><span><strong>Ticket #: </strong>{item._id}</span></div>
                             <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
                             {/* <h5>{item.postedBy.name}</h5> */}
                             {/* <h5 style={{marginLeft: '10px'}}>{state.firstName} {state.lastName}</h5> */}

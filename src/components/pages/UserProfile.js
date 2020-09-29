@@ -120,7 +120,7 @@ const Profile = () => {
                 userProfile.posts.map(item => {
                     return(
                         <div className='card home-card' key={item._id}>
-                        <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
+                        <div style={{ textAlign: 'center', backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '25px' }}><span><strong>Ticket #: </strong>{item._id}</span></div>
                             <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
                             {/* <h5 style={{ marginLeft: '10px' }}><strong>Posted By: </strong>{state.firstName} {state.lastName}</h5> */}
                             <h6 style={{textAlign: 'center'}}><strong>Posted At: </strong>{(item.createdAt).toString().split('').slice(11,19)} {(item.createdAt).toString().split('').slice(0,10)}</h6>

@@ -133,7 +133,7 @@ const Home = () => {
                 data.map( item => {
                     return (
                         <div className='card home-card' key={item._id}>
-                            <div style={{ backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '10px' }}></div>
+                            <div style={{ textAlign: 'center', backgroundColor: item.severity === 'High' ? 'red' : item.severity === 'Moderate' ? 'green' : item.severity === 'Low' ? 'yellow' : null, height: '25px' }}><span><strong>Ticket #: </strong>{item._id}</span></div>
                             <h5 style={{ textAlign: 'center' }}>{item.title}</h5> 
                             <h5 style={{ marginLeft: '10px', textAlign: 'center' }}><strong>Posted By: </strong> <Link to={item.postedBy._id !== state._id ? ('/profile/' + item.postedBy._id) : '/profile'}>{item.postedBy.firstName} {item.postedBy.lastName}</Link> {item.postedBy._id == state._id 
                             && <i 
@@ -154,6 +154,8 @@ const Home = () => {
                                 <h6 style={{textAlign: 'center'}}><strong>Last Update: </strong>{(item.updatedAt).toString().split('').slice(11,19)} {(item.updatedAt).toString().split('').slice(0,10)}</h6>
                                 <br/>
                                 <h6 style={{textAlign: 'center'}}><strong>Status: </strong>{item.status === 'Pending' ? <span>⌛</span> : item.status === 'Completed' ? <span>✔️</span> : null} {item.status}</h6>
+                                {item.postedBy._id == state._id 
+                                &&  
                                 <Modal
                                     actions={[
                                         <Button flat modal="close" node="button" waves="green">Close</Button>
@@ -305,6 +307,7 @@ const Home = () => {
                                     </button>
                                 </div>
                                 </Modal>
+                            }
                                 <h6><strong>Deadline: </strong>{item.due}</h6>
                                 <h6><strong>Source Code: </strong><a href={item.github}>{item.github}</a></h6>
                                 <h6><strong>Severity: </strong>{item.severity} {item.severity === 'High' ? <span>🔴</span> : item.severity === 'Moderate' ? <span>🟢</span> : item.severity === 'Low' ? <span>🟡</span> : null}</h6>
