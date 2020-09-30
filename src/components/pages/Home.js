@@ -341,7 +341,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#ff0040',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -358,7 +358,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#ff0040',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -376,7 +376,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#ff0040',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -393,7 +393,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#ff0040',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -420,7 +420,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#6600CC',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -433,7 +433,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#6600CC',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -447,7 +447,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#6600CC',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -460,7 +460,7 @@ const Home = () => {
                 '#FF6384',
                 '#4BC0C0',
                 '#FFCE56',
-                '#E7E9ED',
+                '#6600CC',
                 '#36A2EB', 
                 '#101010',
                 '#600000',
@@ -480,61 +480,111 @@ const Home = () => {
             <strong>Dashboard 👋</strong>
             </div>
         <div style={{margin: '20px 20px 20px 20px', borderRadius: '30px', border: '10px solid #1E90FF'}}>
-            <div style={{display: 'flex', justifyContent: 'space-around', flexDirection: 'row', flexWrap: 'wrap'}}>
-                <div style={{ textAlign: 'center' }}>
-                <span><strong>Ticket Severities</strong></span>
+            <div style={{display: 'flex', justifyContent: 'space-around', flexDirection: 'row', flexWrap: 'wrap', marginTop: '25px', marginBottom: '25px'}}>
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <span style={{ fontSize: '30px' }}><strong>Ticket Severity Count</strong></span>
                 <Bar
                 data={severityChart}
                 width={550}
-                height={225}
+                height={120}
                 options={{
                 maintainAspectRatio: false, 
-                legend: false 
+                legend: false, 
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }], 
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }]
+                 }
                 }}
                 />
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                <span><strong>Ticket Status</strong></span>
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <span style={{ fontSize: '30px' }}><strong>Ticket Status Count</strong></span>
                 <Doughnut 
                 data={statusChart}
-                width={550}
-                height={225}
-                options={{ maintainAspectRatio: false }}
+                width={350}
+                height={120}
+                options={{ 
+                    maintainAspectRatio: false 
+                }}
                 />
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                <span><strong># of tickets posted/month</strong></span>
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <span style={{ fontSize: '30px' }}><strong>Tickets Reported (Monthly)</strong></span>
                 <Line 
                 data={postedTicket}
                 width={550}
-                height={225}
+                height={120}
                 options={{
                 maintainAspectRatio: false, 
-                legend: false 
+                legend: false, 
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }], 
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }]
+                 }
                 }}
                 />
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                <span><strong>Language Associated With Tickets</strong></span>
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <span style={{ fontSize: '30px' }}><strong>Language Associated With Tickets</strong></span>
                 <HorizontalBar 
                 data={languageChart} 
-                width={800}
-                height={450}
+                width={700}
+                height={400}
                 options={{
                 maintainAspectRatio: false, 
-                legend: false 
+                legend: false, 
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }], 
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }]
+                 }
                 }}
                 />
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                <span><strong>Framework Associated With Tickets</strong></span>
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <span style={{ fontSize: '30px' }}><strong>Framework Associated With Tickets</strong></span>
                 <HorizontalBar
                 data={frameworkChart} 
-                width={800}
-                height={450}
+                width={700}
+                height={400}
                 options={{
                 maintainAspectRatio: false, 
-                legend: false 
+                legend: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }], 
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 20
+                            }
+                        }]
+                 }
                 }}
                 />
                 </div>
