@@ -294,7 +294,6 @@ const Home = () => {
         labels: ['High', 'Moderate', 'Low'],
         datasets: [
           {
-            // label: ['High', 'Moderate', 'Low'],
             backgroundColor: ['#B22222','green', 'yellow'], 
             borderColor: ['#DC143C', '#90EE90', '#F0E68C'],
             borderWidth: 1,
@@ -479,21 +478,22 @@ const Home = () => {
             <div style={{fontSize: '30px', textAlign: 'center', fontSize: '40px', marginTop: '10px'}}>
             <strong>Dashboard 👋</strong>
             </div>
-        <div style={{margin: '20px 20px 20px 20px', borderRadius: '30px', border: '10px solid #1E90FF'}}>
+        <div style={{margin: '20px 20px 20px 20px'}}>
             <div style={{display: 'flex', justifyContent: 'space-around', flexDirection: 'row', flexWrap: 'wrap', marginTop: '25px', marginBottom: '25px'}}>
                 <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                 <span style={{ fontSize: '30px' }}><strong>Ticket Severity Count</strong></span>
-                <Bar
-                data={severityChart}
-                width={550}
+                <HorizontalBar
+                data={severityChart} 
+                width={600}
                 height={120}
                 options={{
                 maintainAspectRatio: false, 
-                legend: false, 
+                legend: false,
                 scales: {
                     xAxes: [{
                         ticks: {
-                            fontSize: 20
+                            fontSize: 20, 
+                            beginAtZero: true
                             }
                         }], 
                     yAxes: [{
@@ -512,7 +512,13 @@ const Home = () => {
                 width={350}
                 height={120}
                 options={{ 
-                    maintainAspectRatio: false 
+                    maintainAspectRatio: false, 
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontSize: 20
+                        }
+                    }
                 }}
                 />
                 </div>
@@ -520,7 +526,7 @@ const Home = () => {
                 <span style={{ fontSize: '30px' }}><strong>Tickets Reported (Monthly)</strong></span>
                 <Line 
                 data={postedTicket}
-                width={550}
+                width={620}
                 height={120}
                 options={{
                 maintainAspectRatio: false, 
@@ -552,7 +558,8 @@ const Home = () => {
                 scales: {
                     xAxes: [{
                         ticks: {
-                            fontSize: 20
+                            fontSize: 20, 
+                            beginAtZero: true
                             }
                         }], 
                     yAxes: [{
@@ -576,7 +583,8 @@ const Home = () => {
                 scales: {
                     xAxes: [{
                         ticks: {
-                            fontSize: 20
+                            fontSize: 20, 
+                            beginAtZero: true
                             }
                         }], 
                     yAxes: [{
